@@ -1,9 +1,17 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html><head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>图书管理</title>
 <link type="text/css" rel="stylesheet" href="css/style.css">
-
+<script type="text/javascript" src="js/jquery-1.8.3.min.js">
+	// $("input[name=lend]").click(function () {
+	// 	var id=$(this).parentNode.parentNode.parentNode.children[1].innerHTML;
+	// 	console.log(id);
+	// 	location.href="bookServlet?flag=selectById&id="+id;
+	// })
+</script>
 </head>
 <body>
 
@@ -12,12 +20,11 @@
 		<table>
 			<tbody>
 				<tr>
-					<td><form method="post" action="bill.do">
+					<td><form method="post" action="/BookList2.action">
 							<input name="method" value="query" class="input-text" type="hidden"> 
-							书籍名称：<input name="productName" class="input-text" type="text" value="">
-							作者：<input name="proName" class="input-text" type="text" value="">
-							
-							是否借出：<input type="radio" name="payed" value="1">是<input type="radio" name="payed" value="0">否
+							书籍名称：<input name="name" class="input-text" type="text" value="${searchName}">
+							作者：<input name="author" class="input-text" type="text" value="${searchAuthor}">
+							是否借出：<input type="radio" name="lend" value="是">是<input type="radio" name="lend" value="否">否
 							<input value="查 询" type="submit">
 						</form>
 					</td>
@@ -48,75 +55,33 @@
 						<td width="100"><div class="STYLE1" align="center">图书管理</div>
 						</td>
 					</tr>
-					
+					<c:forEach items="${pageInfo.list}" var="book">
 					<tr>
-						<td height="23"><span class="STYLE1">6</span>
-						</td>
-						<td><span class="STYLE1"><a href="billView.html" style="color:red" > 西游记</a>
-						</span>
-						</td>
-						<td><span class="STYLE1"> 吴承恩</span>
-						</td>
-						<td><span class="STYLE1">中华出版社</span>
-						</td>
-						<td><span class="STYLE1">
-							
-							 否
-						</span>
-						</td>
-						<td >
-			<em><input value="借阅" class="input-button" onclick="" type="button">
-			</em>
-						</td>
+							<td height="23"><span class="STYLE1">${book.id}</span></td>
+							<td><span class="STYLE1">${book.name}</span></td>
+							<td><span class="STYLE1"> ${book.author}</span></td>
+							<td><span class="STYLE1">${book.publisher}</span></td>
+							<td><span class="STYLE1" id="lend">${book.lend}</span></td>
+							<td><a href="/lend.action?bookId=${book.id}"><em>
+								<c:if test="${book.lend=='否'}"><input  name="jieyue" type="button" value="借阅" class="input-button"></c:if>
+								<c:if test="${book.lend=='是'}"><input  type="button" value="借阅" class="input-button-disabled" disabled></c:if>
+						</em></a></td>
 					</tr>
-					
-					
-					
-					<tr>
-						<td height="23"><span class="STYLE1">6</span>
-						</td>
-						<td><span class="STYLE1"><a href="billView.html" style="color:red" > 西游记</a>
-						</span>
-						</td>
-						<td><span class="STYLE1"> 吴承恩</span>
-						</td>
-						<td><span class="STYLE1">中华出版社</span>
-						</td>
-						<td><span class="STYLE1">
-							
-							 是
-						</span>
-						</td>
-							<td >
-			<em><input value="借阅" class="input-button-disabled" onclick="" type="button" disabled="false">
-			</em>
-						</td>
-					</tr>
-					
-						<tr>
-						<td height="23"><span class="STYLE1">6</span>
-						</td>
-						<td><span class="STYLE1"><a href="billView.html" style="color:red" > 西游记</a>
-						</span>
-						</td>
-						<td><span class="STYLE1"> 吴承恩</span>
-						</td>
-						<td><span class="STYLE1">中华出版社</span>
-						</td>
-						<td><span class="STYLE1">
-							
-							 否
-						</span>
-						</td>
-						<td >
-			<em><input value="借阅" class="input-button" onclick="" type="button">
-			</em>
-						</td>
-					</tr>
-					
+					</c:forEach>
 				</tbody>
 			</table>
+			<div align="center">当前页是第<span>${pageInfo.pageNum}</span>页&nbsp; 一共<span>${pageInfo.pages}</span>页
+				<c:if test="${pageInfo.isFirstPage==false}">
+					<a href="/BookList2.action?page=${pageInfo.prePage}" >上一页></a></c:if>
+
+				<c:if test="${pageInfo.isFirstPage==true}">上一页</c:if>
+				<c:if test="${pageInfo.isLastPage==false}">
+					<a href="/BookList2.action?page=${pageInfo.nextPage}"> 下一页></a></c:if>
+
+				<c:if test="${pageInfo.isLastPage==true}">下一页</c:if>
+			</div>
 		</div>
 	</div>
-
+<script type="text/javascript">
+</script>
 </body></html>

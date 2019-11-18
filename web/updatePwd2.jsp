@@ -11,7 +11,7 @@
 		<div class="optitle clearfix">
 			<div class="title">密码修改&gt;&gt;</div>
 		</div>
-		<form action="/userServlet?flag=modifyPS" method="post">
+		<form action="/userServlet?flag=modifyPS2&id2=${id2}" method="post">
 			<div class="content">
 				<table class="box"> 
 				  <input  type="hidden" id="userId" value="${userInfo.userId}"/>

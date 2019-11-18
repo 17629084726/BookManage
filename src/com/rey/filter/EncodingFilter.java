@@ -1,4 +1,4 @@
-package filter;
+package com.rey.filter;
 
 
 import javax.servlet.*;

@@ -1,5 +1,4 @@
-﻿
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
 <style>
@@ -14,16 +13,16 @@
 <body>
 <div class="content">
 			<div class="top">
-				<iframe src="top.jsp" scrolling="No" id="top" noresize="noresize">
+				<iframe src="top.html"  scrolling="No"  id="top" noresize="noresize">
 				</iframe>
 			</div>
 				<div class="main">
 					<div class="left">
-						<iframe src="left.jsp" scrolling="No" id="left" noresize="noresize">
+						<iframe src="left.jsp" scrolling="No"  id="left" noresize="noresize">
 					  </iframe>
 						</div>
 					<div class="right">
-						<iframe src="main.jsp" id="mainFrame" name="mainFrame" noresize="noresize" >
+						<iframe src="main.jsp"  id="mainFrame" name="mainFrame" noresize="noresize" >
 					  </iframe>
 						</div>
 				</div>
